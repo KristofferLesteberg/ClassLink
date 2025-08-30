@@ -13,8 +13,7 @@ wsServer.on("connection", (connection, request) => {
     //Slik ser connectionen ut i browsern
     //ws://localhost:8000?username = xxx
 
-     const { username } = url.parse(request.url, true).query
-
+     const { username } = url.parse(request.url, true).query  
      console.log(username)
 })
 
