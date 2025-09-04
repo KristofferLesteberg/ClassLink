@@ -2,6 +2,7 @@ const http = require('http')
 const { WebSocketServer } = require('ws')
 
 const url = require("url")
+const { timeStamp } = require('console')
 const uuidv4 = require("uuid").v4
 
 const server = http.createServer()
@@ -12,10 +13,10 @@ const port = 8000
 const connections = { }
 const users = { }
 
-const broadcast = () => {
-    Object.keys(connections).forEach(uuid => {
-        const connection = connections[uuid]
-        const message = JSON.stringify(users)
+const broadcast = (data) => {
+    const message = JSON.stringify(data)
+
+    Object.values(connections).forEach(connection => {
         connection.send(message)
     })
 }
@@ -25,11 +26,16 @@ const handleMessage = (bytes, uuid) => {
     const message = JSON.parse(bytes.toString())
     const user = users[uuid]
 
-    user.state = message
+    const chatMessage = {
+        username: user.username,
+        text: message.text,
+        timeStamp: new Date().toISOString()
+    }
 
-    broadcast()
 
-    console.log(`${user.username} updated their state: ${JSON.stringify(user.state)}`)
+    broadcast({ type: "chat", message: chatMessage })
+
+    console.log(`${user.username}: ${message.text}`)
 }
 
 const handleClose = uuid => {
@@ -37,23 +43,23 @@ const handleClose = uuid => {
     delete connections[uuid]
     delete users[uuid]
 
-    broadcast()
+    broadcast({ type: "system", message: `${uuid} left the chat`})
 }
 
 
 wsServer.on("connection", (connection, request) => {
-    //Slik ser connectionen ut i browsern
-    //ws://localhost:8000?username=xxx
+    
      const { username } = url.parse(request.url, true).query
      const uuid = uuidv4()  
      console.log(username)
      console.log(uuid)
 
      connections[uuid] = connection
-     users[uuid] = {
-        username: username,
-        state: { }
-     }
+     users[uuid] = { username }
+
+     console.log(`${username} connected with id ${uuid}`)
+
+     broadcast({ type: "system", message: `${username} joined the chat`})
 
      connection.on("message", message => handleMessage(message, uuid))
      connection.on("close", () => handleClose(uuid))

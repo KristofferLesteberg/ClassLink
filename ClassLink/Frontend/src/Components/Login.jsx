@@ -1,28 +1,23 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from "react";
 
-const Login = ({ onSubmit }) => {
-    const [username, setUsername] = useState("")
+export default function Login({ onLogin }) {
+  const [username, setUsername] = useState("");
+
+  const handleSubmit = () => {
+    if (username.trim()) {
+      onLogin(username.trim());
+    }
+  };
+
   return (
-    <>
-        <h1>Velkommen til Classlink!</h1>
-        <p>Brukernavn:</p>
-        <form 
-            onSubmit={(e) => {
-                e.preventDefault()
-                onSubmit(username)
-            }}
-        >
-            <input 
-                type='text'
-                value={username}
-                placeholder='username'
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <input type='submit'/>
-        </form>
-    </>
-  )
+    <div>
+      <h1>Login</h1>
+      <input
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Enter your username"
+      />
+      <button onClick={handleSubmit}>Join Chat</button>
+    </div>
+  );
 }
-
-export default Login
