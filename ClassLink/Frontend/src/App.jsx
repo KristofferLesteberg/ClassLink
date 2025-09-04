@@ -1,18 +1,23 @@
 import React, { useState } from 'react'
+import Login from './Components/Login'
+import Home from './Home'
 
 const App = () => {
 
-  const [count, setCount] = useState(0)
+  const [username, setUsername] = useState("") 
+
+  return username ? (
+    <Home username={username}/>
+  ) : (
+    <Login onSubmit={setUsername} />
+  )
+  /*
   return (
     <>
-      <div className='text-white'>
-        <button onClick={() => setCount(count + 1)}>
-          Click me
-        </button>
-        <h1>{count}</h1>
-      </div>
+      <Login onSubmit={setUser} />
     </>
   )
+  */
 }
+
 export default App
-// Comment
