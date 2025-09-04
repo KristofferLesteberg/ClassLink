@@ -6,7 +6,6 @@ const { timeStamp } = require('console')
 const uuidv4 = require("uuid").v4
 
 const server = http.createServer()
-
 const wsServer = new WebSocketServer({ server })
 const port = 8000
 
@@ -28,24 +27,24 @@ const handleMessage = (bytes, uuid) => {
 
     const chatMessage = {
         username: user.username,
-        text: message.text,
-        timeStamp: new Date().toISOString()
+        text: message.text
     }
-
 
     broadcast({ type: "chat", message: chatMessage })
 
     console.log(`${user.username}: ${message.text}`)
 }
 
-const handleClose = uuid => {
+const handleClose = (uuid) => {
     console.log(`${users[uuid].username} disconnected`)
+
+    broadcast({ type: "system", message: `${users[uuid].username} left the chat`})
+
     delete connections[uuid]
     delete users[uuid]
 
-    broadcast({ type: "system", message: `${uuid} left the chat`})
+    
 }
-
 
 wsServer.on("connection", (connection, request) => {
     

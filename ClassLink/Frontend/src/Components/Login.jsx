@@ -4,8 +4,8 @@ export default function Login({ onLogin }) {
   const [username, setUsername] = useState("");
 
   const handleSubmit = () => {
-    if (username.trim()) {
-      onLogin(username.trim());
+    if (username) {
+      onLogin(username);
     }
   };
 

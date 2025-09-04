@@ -9,10 +9,14 @@ export default function App() {
   const [input, setInput] = useState("");
 
   // Setter opp en socketURL hvis en logger inn med brukernavn, eller så setter den til null
-  const socketUrl = username ? `ws://localhost:8000?username=${username}` : null;
+  let socketUrl = null
+  if(username) {
+    socketUrl = `ws://localhost:8000?username=${username}`
+  }
 
-
+  //Bruk av useWebSocket hooken
   const { sendMessage, lastMessage } = useWebSocket(socketUrl, {
+    //reconnecter brukere hvis de mister connection
     shouldReconnect: () => true,
   });
 
@@ -20,21 +24,21 @@ export default function App() {
 
   useEffect(() => {
     if (lastMessage !== null) {
+      //Gjør om websocket melding, lastmessage om til et js object, som vi kan bruke
       const data = JSON.parse(lastMessage.data);
 
+      //Sjekker hvilket type meldingen/dataen er, se i index.js for å se de ulike typene
       if (data.type === "chat") {
-        setMessages((prev) => [
-          ...prev,
-          `${data.message.username}: ${data.message.text}`,
-        ]);
+        setMessages((prev) => [...prev,`${data.message.username}: ${data.message.text}`]);
       } else if (data.type === "system") {
         setMessages((prev) => [...prev, `* ${data.message}`]);
       }
     }
+    //Kjører hver gang lastMessage blir oppdatert
   }, [lastMessage]);
 
   const handleSend = () => {
-    if (input.trim()) {
+    if (input) {
       sendMessage(JSON.stringify({ text: input }));
       setInput("");
     }
