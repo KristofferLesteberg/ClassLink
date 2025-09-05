@@ -2,7 +2,6 @@ const http = require('http')
 const { WebSocketServer } = require('ws')
 
 const url = require("url")
-const { timeStamp } = require('console')
 const uuidv4 = require("uuid").v4
 
 const server = http.createServer()
@@ -14,12 +13,10 @@ const users = { }
 
 const broadcast = (data) => {
     const message = JSON.stringify(data)
-
     Object.values(connections).forEach(connection => {
         connection.send(message)
     })
 }
-
 
 const handleMessage = (bytes, uuid) => {
     const message = JSON.parse(bytes.toString())
@@ -31,7 +28,6 @@ const handleMessage = (bytes, uuid) => {
     }
 
     broadcast({ type: "chat", message: chatMessage })
-
     console.log(`${user.username}: ${message.text}`)
 }
 
@@ -42,8 +38,6 @@ const handleClose = (uuid) => {
 
     delete connections[uuid]
     delete users[uuid]
-
-    
 }
 
 wsServer.on("connection", (connection, request) => {

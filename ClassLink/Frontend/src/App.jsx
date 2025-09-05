@@ -17,13 +17,12 @@ export default function App() {
   }
 
   //Bruk av useWebSocket hooken
-  const { sendMessage, lastMessage } = useWebSocket(socketUrl, {
+  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl, {
     //reconnecter brukere hvis de mister connection
     shouldReconnect: () => true,
   });
 
-
-
+  
   useEffect(() => {
     if (lastMessage !== null) {
       //Gjør om websocket melding, lastmessage om til et js object, som vi kan bruke
