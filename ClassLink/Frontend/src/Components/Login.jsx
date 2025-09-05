@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
 export default function Login({ onLogin }) {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("")
 
   const handleSubmit = () => {
     if (username) {
-      onLogin(username);
+      onLogin(username)
     }
   };
 
