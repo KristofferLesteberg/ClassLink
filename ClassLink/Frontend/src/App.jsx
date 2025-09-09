@@ -4,6 +4,7 @@ import Login from "./Components/Login.jsx"
 import Messages from "./Components/Messages.jsx"
 import Input from "./Components/Input.jsx"
 
+
 export default function App() {
   //setter opp variabler som skal endre seg
   const [username, setUsername] = useState("")
@@ -17,10 +18,13 @@ export default function App() {
   }
 
   //Bruk av useWebSocket hooken
-  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl, {
+  const { sendMessage, lastMessage } = useWebSocket(socketUrl, {
     //reconnecter brukere hvis de mister connection
     shouldReconnect: () => true,
   });
+
+  
+
 
   
   useEffect(() => {
@@ -44,13 +48,18 @@ export default function App() {
     return <Login onLogin={setUsername} />
   }
 
-  return (
+  return (  
+<>
+    <header>
+      <h2>Logged inn som {username}</h2>
+      <h1>ClassLink</h1>
+    </header>
+    
     <main>
-      <h2><b>ClassLink</b> - Logged inn som {username}</h2>
-
-      <Messages messages={messages}/>
-
-      <Input setInput={setInput} input={input} sendMessage={sendMessage}/>
+      
+        <Messages messages={messages}/>
+        <Input setInput={setInput} input={input} sendMessage={sendMessage}/>
     </main>
-  );
+  </>
+  )
 }

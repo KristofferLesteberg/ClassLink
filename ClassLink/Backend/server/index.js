@@ -27,6 +27,8 @@ const handleMessage = (bytes, uuid) => {
         text: message.text
     }
 
+
+    
     broadcast({ type: "chat", message: chatMessage })
     console.log(`${user.username}: ${message.text}`)
 }
@@ -35,7 +37,6 @@ const handleClose = (uuid) => {
     console.log(`${users[uuid].username} disconnected`)
 
     broadcast({ type: "system", message: `${users[uuid].username} left the chat`})
-
     delete connections[uuid]
     delete users[uuid]
 }
