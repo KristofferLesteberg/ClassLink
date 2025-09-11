@@ -14,9 +14,8 @@ export default function App() {
   // Setter opp en socketURL hvis brukernavn fins/logget inn
   let socketUrl = null
   if(username) {
-    socketUrl = `ws://localhost:8000?username=${username}`
+    socketUrl = `wss://classlink-cj83.onrender.com/?username=${username}`
   }
-
   //Bruk av useWebSocket hooken
   const { sendMessage, lastMessage } = useWebSocket(socketUrl, {
     //reconnecter brukere hvis de mister connection
