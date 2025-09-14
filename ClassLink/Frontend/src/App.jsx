@@ -3,6 +3,7 @@ import useWebSocket from "react-use-websocket"
 import Login from "./Components/Login.jsx"
 import Messages from "./Components/Messages.jsx"
 import Input from "./Components/Input.jsx"
+import Registrer from "./Components/Registrer.jsx"
 
 
 export default function App() {
@@ -14,16 +15,13 @@ export default function App() {
   // Setter opp en socketURL hvis brukernavn fins/logget inn
   let socketUrl = null
   if(username) {
-    socketUrl = `wss://classlink-cj83.onrender.com/?username=${username}`
+    socketUrl = `ws://localhost:5173//?username=${username}`
   }
   //Bruk av useWebSocket hooken
   const { sendMessage, lastMessage } = useWebSocket(socketUrl, {
     //reconnecter brukere hvis de mister connection
     shouldReconnect: () => true,
   });
-
-  
-
 
   
   useEffect(() => {
@@ -43,10 +41,11 @@ export default function App() {
 
 
 //Viser Login hvis username ikke eksisterer 
-  if (!username) {
-    return <Login onLogin={setUsername} />
-  }
+  /*if (!username) {
+    return <Registrer onLogin={setUsername} />
+  }*/
 
+    
   return (  
 <>
     <header>
@@ -55,10 +54,13 @@ export default function App() {
     </header>
     
     <main>
-      
+        
         <Messages messages={messages}/>
         <Input setInput={setInput} input={input} sendMessage={sendMessage}/>
     </main>
   </>
   )
+
+  //<Registrer onLogin={setUsername} />
+  
 }

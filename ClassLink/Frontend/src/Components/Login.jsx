@@ -10,14 +10,16 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <form>
+      <h1>Velkommen tilbake ClassLink</h1>
       <input
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         placeholder="Enter your username"
       />
       <button onClick={handleSubmit}>Join Chat</button>
-    </div>
+
+      <p>Har allerede en bruker, log in</p>
+    </form>
   );
 }
