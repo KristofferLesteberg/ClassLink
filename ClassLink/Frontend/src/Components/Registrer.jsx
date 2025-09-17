@@ -21,7 +21,7 @@ export default function Registrer({ onLogin = () => {} }) {
       const result = await signUpNewUser(email, password)
       
         if(!result.success) {
-          setError("a error happend")
+          setError("Ugyldig Email eller passord")
         }
 
         onLogin(email)
@@ -42,13 +42,13 @@ export default function Registrer({ onLogin = () => {} }) {
       <h1>Registrer deg til ClassLink</h1>
       <div className="inputs">
         <label>Email:</label><br></br>
-        <input onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" /> 
+        <input className="input" onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" /> 
         <br />
         <label>Passord:</label><br></br>
-        <input onChange={(e) => setPassword(e.target.value)} placeholder="Passord" type="password" /> 
+        <input className="input" onChange={(e) => setPassword(e.target.value)} placeholder="Passord" type="password" /> 
 
-        <button type="submit" disabled={loading}>Join Chat</button>
-        {error && <p>{error}</p>}
+        <button className="reg-btn" type="submit" disabled={loading}>Join Chat</button>
+        {error && <p className="reg-error">{error}</p>}
       </div>       
 
       <p>Har allerede en bruker? <Link to='/Login'>Log deg inn!</Link> </p>

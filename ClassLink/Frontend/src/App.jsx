@@ -78,7 +78,7 @@ export default function App() {
     return (
     <>
     <header >
-      <h2>Logged inn som {username.split("@")}</h2>
+      <h2>Logged inn som {username.split("@",[1])}</h2>
       <h1 className="FP-h1">ClassLink</h1>
       <p onClick={handleSignOut}>Log ut</p> 
     </header>
