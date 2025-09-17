@@ -6,7 +6,7 @@ const uuidv4 = require("uuid").v4
 
 const server = http.createServer()
 const wsServer = new WebSocketServer({ server })
-const port = process.env.PORT || 8000
+const port = 8000
 
 
 const connections = { }
@@ -24,7 +24,7 @@ const handleMessage = (bytes, uuid) => {
     const user = users[uuid]
 
     const chatMessage = {
-        username: user.username,
+        username: user.username.split("@", [1]),
         text: message.text
     }
 
@@ -37,7 +37,7 @@ const handleMessage = (bytes, uuid) => {
 const handleClose = (uuid) => {
     console.log(`${users[uuid].username} disconnected`)
 
-    broadcast({ type: "system", message: `${users[uuid].username} left the chat`})
+    broadcast({ type: "system", message: `${users[uuid].username.split("@", [1])} left the chat`})
     delete connections[uuid]
     delete users[uuid]
 }
@@ -54,7 +54,7 @@ wsServer.on("connection", (connection, request) => {
 
      console.log(`${username} connected with id ${uuid}`)
 
-     broadcast({ type: "system", message: `${username} joined the chat`})
+     broadcast({ type: "system", message: `${username.split("@", [1])} joined the chat`})
 
      connection.on("message", message => handleMessage(message, uuid))
      connection.on("close", () => handleClose(uuid))
