@@ -9,7 +9,7 @@ import { AuthContextProvider } from './Context/AuthContext.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <>
-      <h1>ClassLink</h1>
+ 
       <AuthContextProvider>
         <RouterProvider router={router} />
       </AuthContextProvider>
