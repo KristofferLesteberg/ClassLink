@@ -81,13 +81,14 @@ export default function App() {
     <main className="FP-main">
       <header className="FP-header">
         <h1 className="FP-h1">ClassLink</h1>
+        <hr />
 
         <div className="FP-userinfo">
           <h3>Logged in som: {username.split("@",[1])}</h3>
           <p className="FP-logout" onClick={handleSignOut}>Log ut</p> 
         </div>
       </header>
-      
+  
       <div className="FP-chats">
           {console.log(username)}
           <Messages messages={messages}/>

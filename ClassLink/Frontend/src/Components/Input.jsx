@@ -18,7 +18,7 @@ const Input = ( {setInput, input, sendMessage} ) => {
         placeholder="Type a message..."
         
       />
-      <button className='FP-btn' onClick={handleSend}>&#129074;</button>
+      <button className='FP-btn' onClick={handleSend}>Send</button>
     </>
   )
 }

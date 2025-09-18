@@ -37,7 +37,7 @@ const handleMessage = (bytes, uuid) => {
 const handleClose = (uuid) => {
     console.log(`${users[uuid].username} disconnected`)
 
-    broadcast({ type: "system", message: `${users[uuid].username.split("@", [1])} left the chat`})
+    //broadcast({ type: "system", message: `${users[uuid].username.split("@", [1])} left the chat`})
     delete connections[uuid]
     delete users[uuid]
 }
@@ -54,7 +54,7 @@ wsServer.on("connection", (connection, request) => {
 
      console.log(`${username} connected with id ${uuid}`)
 
-     broadcast({ type: "system", message: `${username.split("@", [1])} joined the chat`})
+     //broadcast({ type: "system", message: `${username.split("@", [1])} joined the chat`})
 
      connection.on("message", message => handleMessage(message, uuid))
      connection.on("close", () => handleClose(uuid))
