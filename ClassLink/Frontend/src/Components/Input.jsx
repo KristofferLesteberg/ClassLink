@@ -1,5 +1,7 @@
 import React from 'react'
 
+
+
 const Input = ( {setInput, input, sendMessage} ) => {
 
     const handleSend = () => {
@@ -14,8 +16,9 @@ const Input = ( {setInput, input, sendMessage} ) => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Type a message..."
+        
       />
-      <button onClick={handleSend}>Send</button>
+      <button className='FP-btn' onClick={handleSend}>&#129074;</button>
     </>
   )
 }

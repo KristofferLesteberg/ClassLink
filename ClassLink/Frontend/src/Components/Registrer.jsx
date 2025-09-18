@@ -39,19 +39,24 @@ export default function Registrer({ onLogin = () => {} }) {
   return (
     <div className="Reg-page">
     <form onSubmit={handleSignIn} >
-      <h1>Registrer deg til ClassLink</h1>
+      <div className="reg-header">
+        <h1 className="reg-h1">Velkommen til ClassLink</h1>
+        <p className="req-header-text">Registrer deg i dag!</p>
+      </div>
       <div className="inputs">
-        <label>Email:</label><br></br>
+        <p>Email:</p>
+        <br></br>
         <input className="input" onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" /> 
         <br />
-        <label>Passord:</label><br></br>
+        <p>Passord:</p>
+        <br></br>
         <input className="input" onChange={(e) => setPassword(e.target.value)} placeholder="Passord" type="password" /> 
 
         <button className="reg-btn" type="submit" disabled={loading}>Join Chat</button>
         {error && <p className="reg-error">{error}</p>}
       </div>       
 
-      <p>Har allerede en bruker? <Link to='/Login'>Log deg inn!</Link> </p>
+      <p className="req-footer">Har allerede en bruker? <Link to='/Login'>Log deg inn!</Link> </p>
 
     </form>
     </div>

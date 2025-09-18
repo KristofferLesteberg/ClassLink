@@ -10,6 +10,7 @@ import { supabase } from "./SupabaseClient.js"
 import { UserAuth } from "./Context/AuthContext.jsx"
 import { useNavigate } from "react-router-dom"
 
+import './assets/Frontpage.css'
 
 export default function App() {
 
@@ -77,17 +78,22 @@ export default function App() {
   } else {
     return (
     <>
-    <header >
-      <h2>Logged inn som {username.split("@",[1])}</h2>
-      <h1 className="FP-h1">ClassLink</h1>
-      <p onClick={handleSignOut}>Log ut</p> 
-    </header>
-    
-    <main>
-        {console.log(username)}
-        <Messages messages={messages}/>
-        <Input setInput={setInput} input={input} sendMessage={sendMessage}/>
-        <br />
+    <main className="FP-main">
+      <header className="FP-header">
+        <h1 className="FP-h1">ClassLink</h1>
+
+        <div className="FP-userinfo">
+          <h3>Logged in som: {username.split("@",[1])}</h3>
+          <p className="FP-logout" onClick={handleSignOut}>Log ut</p> 
+        </div>
+      </header>
+      
+      <div className="FP-chats">
+          {console.log(username)}
+          <Messages messages={messages}/>
+          <Input setInput={setInput} input={input} sendMessage={sendMessage}/>
+          <br />
+      </div>
     </main>
     
   </>
