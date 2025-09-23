@@ -84,11 +84,11 @@ export default function App() {
         <hr />
 
         <div className="FP-userinfo">
-          <h3>Logged in som: {username.split("@",[1])}</h3>
+          <h2 className="FP-username">Logged in som: {username.split("@",[1])}</h2>
           <p className="FP-logout" onClick={handleSignOut}>Log ut</p> 
         </div>
       </header>
-  
+
       <div className="FP-chats">
           {console.log(username)}
           <Messages messages={messages}/>

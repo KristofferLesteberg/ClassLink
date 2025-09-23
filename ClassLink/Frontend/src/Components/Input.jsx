@@ -15,7 +15,7 @@ const Input = ( {setInput, input, sendMessage} ) => {
         <input
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder="Type a message..."
+        placeholder="Skriv en melding..."
         
       />
       <button className='FP-btn' onClick={handleSend}>Send</button>

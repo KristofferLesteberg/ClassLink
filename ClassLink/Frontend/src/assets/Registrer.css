@@ -35,6 +35,7 @@ h1 {
 
     height: 80vh;
     width: 40vw;
+    min-width: 350px;
 }
 
 .reg-h1 {
@@ -62,8 +63,6 @@ h1 {
 
 
 }
-
-
 
 .inputs p {
     font-size: 18px;
@@ -106,3 +105,4 @@ h1 {
     text-align: center;
     margin-top: 2rem;
 }
+

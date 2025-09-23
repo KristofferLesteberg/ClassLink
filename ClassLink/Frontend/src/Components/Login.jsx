@@ -36,7 +36,7 @@ export default function Login({ onLogin }) {
 
   return (
     <form onSubmit={handleSignUp}>
-      <h1>Login til ClassLink</h1>
+      <h1 className="">Login til ClassLink</h1>
       <p>Har ikke en bruker? <Link to='/'>Registrer deg!</Link> </p>
       <div>
         <input onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" /> 
@@ -44,7 +44,7 @@ export default function Login({ onLogin }) {
         <input onChange={(e) => setPassword(e.target.value)} placeholder="Passord" type="password" /> 
         <br />
         
-        <button type="submit" disabled={loading} /*</div>onClick={handleSubmit}*/>Join Chat</button>
+        <button type="submit" disabled={loading}>Join Chat</button>
         {error && <p>{error}</p>}
       </div>       
 
