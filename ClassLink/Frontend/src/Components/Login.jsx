@@ -22,7 +22,7 @@ export default function Login({ onLogin }) {
       const result = await signInUser(email, password)
       console.log(result)
       if(result.success) {
-        navigate('/Registrer')
+        navigate('/')
       }
     } catch(error) {
       setError("a error happend")
@@ -35,20 +35,32 @@ export default function Login({ onLogin }) {
  
 
   return (
-    <form onSubmit={handleSignUp}>
-      <h1 className="">Login til ClassLink</h1>
-      <p>Har ikke en bruker? <Link to='/'>Registrer deg!</Link> </p>
-      <div>
-        <input onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" /> 
-        <br />
-        <input onChange={(e) => setPassword(e.target.value)} placeholder="Passord" type="password" /> 
-        <br />
-        
-        <button type="submit" disabled={loading}>Join Chat</button>
-        {error && <p>{error}</p>}
-      </div>       
 
-    </form>
+    <div className="Reg-page">
+        <form onSubmit={handleSignUp} >
+          <div className="reg-header">
+            <h1 className="reg-h1">Velkommen tilbake til classlink!</h1>
+            <p className="req-header-text">Log in tilbake</p>
+          </div>
+          <div className="inputs">
+            <p>Email:</p>
+            <br></br>
+            <input className="input" onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email" /> 
+            <br />
+            <p>Passord:</p>
+            <br></br>
+            <input className="input" onChange={(e) => setPassword(e.target.value)} placeholder="Passord" type="password" /> 
+    
+
+            <button type="submit" disabled={loading}>Join Chat</button>
+            {error && <p>{error}</p>}
+            
+          </div>       
+    
+          <p className="req-footer">Har ikke en bruker? <Link to='/Registrer'>Registrer deg i dag</Link> </p>
+    
+        </form>
+        </div>
   );
 
   //<input onChange={(e) => setUsername(e.target.value)} placeholder="Brukernavn" type="text"/>
